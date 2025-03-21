@@ -1,7 +1,7 @@
 const Todo = require("../model/Todo");
 
 
-exports.Addtodo = async(req, res) =>{
+exports.addTodo = async(req, res) =>{
     try{
         const {title, description} = req.body;
         const response = await Todo.create({title, description});

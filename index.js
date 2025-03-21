@@ -3,25 +3,15 @@
 const express= require('express');
 const app = express();
 app.use(express.json());
-const {Addtodo} = require('./config/controller/Addtodo');
-
-app.get("/", (req,rep) =>{
-    rep.send('HELLO WELCOME TO HOME PAGE');
-
-})
-
-app.get("/admin", (req, rep) =>
-{
-    rep.send("HELLO WELCOME TO ADMIN PAGE");
-})
-
-
 
 const dbconnect = require('./config/db');
+const router = require("./routes/todo");
+
 dbconnect();
 
 
-app.post("/first", Addtodo);
+app.use("/api/v1", router);
+
 // app.use(express.json());
 // let arr = [];
 // app.post("/abc", (req, resp) =>{
@@ -38,3 +28,14 @@ app.listen(3000, () =>
 {
     console.log("SERVER IS ON PORT 3000");
 })
+
+app.get("/", (req,rep) =>{
+    rep.send('HELLO WELCOME TO HOME PAGE');
+
+})
+
+app.get("/admin", (req, rep) =>
+{
+    rep.send("HELLO WELCOME TO ADMIN PAGE");
+})
+
